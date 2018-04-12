@@ -10,7 +10,7 @@ app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/signup", methods=['GET', 'POST'])
 def signup():
     username = request.form['username']
     password = request.form['password']
@@ -48,12 +48,22 @@ def signup():
         if len(email) < 3 or len(email) > 20:
             email_error="The email address must be between 3 and 30 characters long."    
         elif not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-z0-9-]+\.[a-zA-Z0-9-.]+$)",email):
-            email_error= "The email address must have a single @, and single ., and contain no spaces."
+            email_error= "The email address must have a single @, a single ., and contain no spaces."
     
     if not username_error and not password_error and not confirmation_error and not email_error:
         return render_template('welcome_page.html', username = username)
     else:
-        return render_template('index.html', username = username, username_error = username_error, password_error = password_error, confirmation_error = confirmation_error,email = email, email_error = email_error)
+        return render_template('index.html', username = username, 
+        username_error = username_error, 
+        password_error = password_error, 
+        confirmation_error = confirmation_error,
+        email = email, 
+        email_error = email_error)
+
+@app.route("/welcome")
+def welcome():
+    username = request.args.get('username')
+    return render_template('welcome_page.html', username=username)
 
 if __name__ == "__main__":
     app.run()
