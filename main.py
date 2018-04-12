@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, render_template
+import cgi
+import os
 import re
-
 
 app = Flask(__name__)
 app.config['DEBUG']= True
@@ -9,7 +10,7 @@ app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/signup", methods=['POST'])
+@app.route("/", methods=['GET', 'POST'])
 def signup():
     username = request.form['username']
     password = request.form['password']
@@ -20,9 +21,8 @@ def signup():
     password_error = '' 
     confirmation_error = ''
     email_error = ''
-
     if username == "":
-        user_error = "Please enter a valid username."
+        username_error = "Please enter a valid username."
     elif len(username) < 3 or len(username) > 20:
         username_error = "Username invalid. Please enter a username between 3 and 20 characters."
         
@@ -55,4 +55,5 @@ def signup():
     else:
         return render_template('index.html', username = username, username_error = username_error, password_error = password_error, confirmation_error = confirmation_error,email = email, email_error = email_error)
 
-app.run()
+if __name__ == "__main__":
+    app.run()
