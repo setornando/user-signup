@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action='/' method='POST'>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="username">Username:</label>
+                </td>
+                <td>
+                    <input name='username' type='text' value='{{username}}' />
+                      <p class='error'>{{ username_error }} </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password"> Password</label>
+                </td>
+                <td>
+                    <input name='password' type='password' />
+                    <p class='error'>{{ password_error }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for"password_confirmation">Confirm Password: </label>
+                </td>
+                    <input name='password_confirmation' type='password' />
+                    <p class='error'>{{confirmation_error}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">E-mail (Optional)</label>
+                </td>
+                <td>
+                    <input name='email' type='text' value='{{email}}' />
+                    <p class='error'>{{ email_error }}</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <label>
+        <input type='submit' value='Signup' />
+    </label>
+</form>
+
+{% endblock %}
