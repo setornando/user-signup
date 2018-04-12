@@ -10,7 +10,7 @@ app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route("/signup", methods=['POST'])
 def signup():
     username = request.form['username']
     password = request.form['password']
@@ -24,23 +24,23 @@ def signup():
     if username == "":
         username_error = "Please enter a valid username."
     elif len(username) < 3 or len(username) > 20:
-        username_error = "Username invalid. Please enter a username between 3 and 20 characters."
+        username_error = "Please enter a username between 3 and 20 characters."
         
     elif " " in username:
-        username_error = "Username invalid. Username cannot contain spaces."
+        username_error = "Username cannot contain spaces."
         
     
     if password == "":
         password_error = "Please enter a valid password."
     elif len(password) < 3 or len(password) > 20:
-        password_error = "Password invalid. Please enter a password between 3 and 20 characters."
+        password_error = "Please enter a password between 3 and 20 characters."
         password = ""
     elif " " in password:
-        password_error = "Password invalid. Password cannot contain spaces."
+        password_error = "Password cannot contain spaces."
         password = ""
     
     if password_confirmation == "" or password_confirmation != password:
-        confirmation_error = "Passwords do not match.Please re-enter."
+        confirmation_error = "Passwords do not match."
         password_confirmation = ""
     
     if email != "":
